@@ -3,6 +3,7 @@ package Document.mini.test.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -14,7 +15,7 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Tên không được để trống")
+    @NotEmpty(message = "Tên không được để trống")
     @Size(min = 5, max = 100, message = "Tên phải có từ 5 đến 100 ký tự")
     private String name;
 
@@ -24,7 +25,7 @@ public class Document {
     @Column(nullable = false)
     private Date year;
 
-    @NotNull(message = "Mô tả không được để trống")
+    @NotEmpty(message = "Mô tả không được để trống")
     private String description;
 
     @NotNull(message = "Phải chọn loại tài liệu")
