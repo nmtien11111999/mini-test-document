@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Document</title>
+</head>
+<body>
+<h1>View Document</h1>
+
+<a th:href="@{/document/list}">Back to Document List</a>
+
+<div>
+    <p><strong>ID:</strong> <span th:text="${document.id}"></span></p>
+    <p><strong>Name:</strong> <span th:text="${document.name}"></span></p>
+    <p><strong>Year:</strong> <span th:text="${#dates.format(document.year, 'yyyy-MM-dd')}"></span></p>
+    <p><strong>Description:</strong> <span th:text="${document.description}"></span></p>
+    <p><strong>Type:</strong> <span th:text="${document.type.name}"></span></p>
+</div>
+</body>
+</html>

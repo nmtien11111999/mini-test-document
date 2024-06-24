@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Type</title>
+</head>
+<body>
+<h1>Edit Type</h1>
+
+<form th:action="@{/type/edit/{id}(id=${type.id})}" th:object="${type}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+        <a th:href="@{/type/list}">Cancel</a>
+    </div>
+</form>
+</body>
+</html>

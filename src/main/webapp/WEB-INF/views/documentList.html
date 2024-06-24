@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document List</title>
+</head>
+<body>
+<h1>Document List</h1>
+
+<a th:href="@{/document/create}">Create New Document</a>
+<a th:href="@{/type/list}">Create New Type</a>
+
+<form action="#" th:action="@{/document/list}" method="get">
+    <input type="text" name="search" th:value="${search}" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="document, state : ${documents}">
+        <td th:text="${state.index + 1 + (documents.number * documents.size)}"></td>
+        <td th:text="${document.name}"></td>
+        <td th:text="${#dates.format(document.year, 'dd-MM-yyyy')}"></td>
+        <td th:text="${document.description}"></td>
+        <td th:text="${document.type.name}"></td>
+        <td>
+            <a th:href="@{/document/view/{id}(id=${document.id})}">View</a>
+            <a th:href="@{/document/edit/{id}(id=${document.id})}">Edit</a>
+            <form th:action="@{/document/delete/{id}(id=${document.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:if="${documents.hasPrevious()}" th:href="@{/document/list(page=${documents.number - 1})}">Previous</a>
+<span th:text="${documents.number + 1}"></span> | <span th:text="${documents.totalPages}"></span>
+<a th:if="${documents.hasNext()}" th:href="@{/document/list(page=${documents.number + 1})}">Next</a>
+</body>
+</html>
